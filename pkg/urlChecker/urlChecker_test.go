@@ -10,7 +10,7 @@ import (
 
 // 체크 테스트
 func TestUrlChecker(t *testing.T) {
-	urlChecker := NewUrlChekcer("https://www.google.com")
+	urlChecker := NewUrlChekcer("https://www.google.com", 5)
 	resp := urlChecker.Run()
 
 	fmt.Println(resp.Request.TraceInfo().ResponseTime.Seconds())
@@ -28,15 +28,26 @@ func TestUrlChecker(t *testing.T) {
 	}
 	fmt.Println(string(prettyResp))
 
+	fmt.Printf("")
+
 	assert.Equal(t, resp.StatusCode(), 200)
 }
 
 // 헤더설정 테스트
 func TestUrlCheckerSetHeader(t *testing.T) {
-	urlChecker := NewUrlChekcer("https://www.google.com")
+	urlChecker := NewUrlChekcer("https://www.google.com", 5)
 
 	m := map[string]string{"test": "test"}
 	urlChecker.SetHeader(m)
 
-	assert.Equal(t, len(urlChecker.header), 1)
+	assert.NotEqual(t, len(urlChecker.header), 0)
+}
+
+// 프린트 테스트
+func TestUrlCheckerPrint(t *testing.T) {
+	urlChecker := NewUrlChekcer("https://www.google.com", 5)
+
+	urlChecker.Run()
+
+	assert.NotEqual(t, urlChecker, nil)
 }
