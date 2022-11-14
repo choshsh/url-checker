@@ -2,7 +2,7 @@ module url-checker
 
 go 1.17
 
-require github.com/stretchr/testify v1.8.0
+require github.com/stretchr/testify v1.8.1
 
 require golang.org/x/net v0.0.0-20211029224645-99673261e6eb // indirect
 
